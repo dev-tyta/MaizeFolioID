@@ -1,8 +1,14 @@
 import streamlit as st
-from preprocessing import preprocess
-from model_utils import load_model, predict_class
+import time
+from .models.load_model import download_model
+from .data.preprocess_img import preprocess
+from .models.predict_model import prediction, classifier
 
-def run_app():
+
+model = download_model("Testys/MaizeFolioID", "model_2.h5")
+
+
+def run():
     st.title("MaizeFolioID")
     st.write("Introducing 'MaizeFolioID': This application applies an advanced "
              "image recognition technology to accurately classify and identify various foliar "
@@ -13,11 +19,13 @@ def run_app():
     if img_in is not None:
         img_content = img_in.read()
         processed_img = preprocess(img_content, target_shape=(224, 224))
-        class_name = predict_class(processed_img)
+        img_pred = prediction(model, x=processed_img)
+        class_name = classifier(img_pred)
     
         with st.spinner(text="Detecting Diseases..."):
-            st.image(img_in, use_column_width=True)
-            st.write(f"The uploaded maize leaf belongs to the {class_name} class.")
+            time.sleep(10)
+        st.write(f"The uploaded maize leaf belongs to the {class_name} class.")
+
 
 if __name__ == "__main__":
-    run_app()
+    run()
