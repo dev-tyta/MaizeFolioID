@@ -13,3 +13,4 @@ streamlit
 tensorflow
 huggingface_hub
 pip 
+protobuf==3.20.0
