@@ -1,8 +1,8 @@
 import streamlit as st
 import time
-from .models.load_model import download_model
-from .data.preprocess_img import preprocess
-from .models.predict_model import prediction, classifier
+from .src.models.load_model import download_model
+from .src.data.preprocess_img import preprocess
+from .src.models.predict_model import prediction, classifier
 
 
 model = download_model("Testys/MaizeFolioID", "model_2.h5")
