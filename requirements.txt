@@ -13,4 +13,3 @@ streamlit
 tensorflow==2.13.0
 huggingface_hub
 pip 
-protobuf==4.21.0
