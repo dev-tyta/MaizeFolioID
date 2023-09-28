@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-from src.models.load_model import download_model
+from src.models.get_model import download_model
 from src.data.preprocess_img import preprocess
 from src.models.predict_model import prediction, classifier
 
