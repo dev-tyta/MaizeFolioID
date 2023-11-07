@@ -46,4 +46,10 @@ def show_random_image(generator):
 
 def plot_confusion_matrix(actual, predicted, label= [3,2,1,0]):
     conf = confusion_matrix(actual, predicted, labels=label)
-    plt.
+    plt.figure(figsize=(8,6))
+    sns.heatmap(conf, annot=True, fmt="d", cmap="Blues")
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title("Confusion Matrix")
+    plt.show()
+
