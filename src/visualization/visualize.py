@@ -1,4 +1,4 @@
-def plot_accuracy_plot(model= ):
+def plot_accuracy_plot(model):
     # Summarize history for accuracy
     plt.figure(figsize=(10, 5))
     plt.subplot(1, 2, 1)
@@ -20,3 +20,6 @@ def plot_accuracy_plot(model= ):
 
     plt.tight_layout()
     plt.show()
+
+
+def confusion_matrix():

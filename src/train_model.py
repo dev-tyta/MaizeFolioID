@@ -12,3 +12,5 @@ from tensorflow.keras.models import Model, Sequential, load_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from huggingface_hub import hf_hub_download
 
+
+#Splitting general dataset into train and test set
