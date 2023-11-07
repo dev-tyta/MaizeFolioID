@@ -57,3 +57,20 @@ val_generator = gen.flow_from_directory(
     subset="validation"
 )
 
+test_generator = test_gen.flow_from_directory(
+    test_data,
+    target_size= (224, 224)
+)
+
+
+# Model Training
+base_model = VGG16(include_top=False, weights='imagenet', input_shape=(224, 224, 3))
+base_model.trainable = True
+set_trainable = False
+for layer in base_model.layers:
+    if layer.name == 'block5_conv1':
+        set_trainable = True
+    if set_trainable:
+        layer.trainable = True
+    else:
+        layer.trainable = False
