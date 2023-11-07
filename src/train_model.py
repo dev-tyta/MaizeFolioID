@@ -14,3 +14,7 @@ from huggingface_hub import hf_hub_download
 
 
 #Splitting general dataset into train and test set
+splitfolders.ratio(input="../data/raw/data",
+                   output= "../data/processed/data",
+                   seed= 42, ratio=(.8, .2, 0.0)
+                   )
