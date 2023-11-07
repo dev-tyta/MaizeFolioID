@@ -1,3 +1,8 @@
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
 def plot_accuracy_plot(model):
     # Summarize history for accuracy
     plt.figure(figsize=(10, 5))
@@ -39,4 +44,6 @@ def show_random_image(generator):
         ax[i].imshow(image)
         ax[i].axis('off')
 
-def confusion_matrix():
+def plot_confusion_matrix(actual, predicted, label= [3,2,1,0]):
+    conf = confusion_matrix(actual, predicted, labels=label)
+    plt.
