@@ -22,4 +22,21 @@ def plot_accuracy_plot(model):
     plt.show()
 
 
+# plotting random images in data
+def show_random_image(generator):
+    fig, ax = plt.subplots(nrows=1, ncols=4, figsize=(15, 15))
+
+    for i in range(4):
+        image = next(generator)[0]
+
+        # Rescale pixel values from [0, 1] to [0, 255]
+        image = np.squeeze(image) * 255.0
+
+        # Convert the pixel values to uint8 type
+        image = image.astype('uint8')
+
+        # Display the image
+        ax[i].imshow(image)
+        ax[i].axis('off')
+
 def confusion_matrix():
