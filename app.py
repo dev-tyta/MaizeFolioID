@@ -24,6 +24,7 @@ def run():
     
         with st.spinner(text="Detecting Diseases..."):
             time.sleep(10)
+        st.image(img_content)
         st.write(f"The uploaded maize leaf belongs to the {class_name} class.")
 
 
