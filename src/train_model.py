@@ -78,14 +78,14 @@ datagen_validation = ImageDataGenerator(rescale=1./255)
 
 train_generator = datagen_train.flow_from_directory(
     train_dir,
-    target_size=(299, 299),
+    target_size=(224, 224),
     class_mode="categorical",
     subset="training",
 )
 
 val_generator = datagen_train.flow_from_directory(
     train_dir,
-    target_size=(299, 299),
+    target_size=(224, 224),
     class_mode="categorical",
     subset="validation"
 )
@@ -138,8 +138,7 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
               )
 
 history = model.fit(train_generator,
-                    batch_size=54,
-                    epochs=50,
+                    epochs=30,
                     validation_data=val_generator
                     )
 
