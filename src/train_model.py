@@ -1,9 +1,12 @@
+import os
+import shutil
+from random import choice
 import tensorflow as tf
 import numpy as np
 # import splitfolders
 # import python_splitter
 import matplotlib.pyplot as plt
-from tensorflow.keras.applications.vgg16 import VGG16,preprocess_input
+from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras import losses
@@ -21,16 +24,11 @@ from keras.utils import to_categorical
 #                    ratio=(.8, .2, .0)
 #                    )
 
-train_dir = "/content/drive/MyDrive/FDD Project/dataset/corn/train"
-test_dir = "/content/drive/MyDrive/FDD Project/dataset/corn/val"
 
-import os
-import shutil
-from random import choice
+train_dir = "../data/processed/corn/train"
+test_dir = "../data/processed/corn/test"
 
-
-data_dir = train_dir
-class_names = os.listdir(data_dir)
+class_names = os.listdir(train_dir)
 class_counts = {}
 
 for class_name in class_names:
@@ -74,27 +72,27 @@ datagen_train = ImageDataGenerator(
     zoom_range=0.2,
     horizontal_flip=True,
     fill_mode='nearest',
-    validation_split= 0.2)
+    validation_split=0.2)
 
 datagen_validation = ImageDataGenerator(rescale=1./255)
 
-train_generator= datagen_train.flow_from_directory(
+train_generator = datagen_train.flow_from_directory(
     train_dir,
-    target_size=(299,299),
-    class_mode = "categorical",
+    target_size=(299, 299),
+    class_mode="categorical",
     subset="training",
 )
 
 val_generator = datagen_train.flow_from_directory(
     train_dir,
     target_size=(299, 299),
-    class_mode= "categorical",
+    class_mode="categorical",
     subset="validation"
 )
 
 test_generator = datagen_validation.flow_from_directory(
     test_dir,
-    target_size = (224,224),
+    target_size=(224, 224),
 )
 
 """## Model Training
@@ -134,7 +132,7 @@ model = Sequential([
 
 model.summary()
 
-model.compile(optimizer= tf.keras.optimizers.Adam(learning_rate=0.0001),
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
               loss='categorical_crossentropy',
               metrics=['accuracy']
               )
@@ -146,8 +144,8 @@ history = model.fit(train_generator,
                     )
 
 """### InceptionV3 Model"""
-
-base2 = InceptionV3(weights="imagenet",include_top=False ,input_shape=(299,299,3))
+"""
+base2 = InceptionV3(weights="imagenet", include_top=False, input_shape=(299, 299, 3))
 # Set the bottom 10 layers to be trainable
 for layer in base2.layers[-10:]:
     layer.trainable = True
@@ -172,19 +170,19 @@ model_inception = Sequential([
 ])
 
 model_inception.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
-                loss="categorical_crossentropy",
-                metrics=["accuracy"]
-                )
+                        loss="categorical_crossentropy",
+                        metrics=["accuracy"]
+                        )
 
 model_inception.summary()
 
 history_in = model_inception.fit(train_generator,
-                     epochs = 50,
-                     validation_data = val_generator
-                     )
-
+                                 epochs=50,
+                                 validation_data=val_generator
+                                 )
+"""
 """### Model Saving"""
 
 model.save("model_vgg.h5", save_format="h5")
 
-model_inception("model_inception.h5", save_format="h5")
+# model_inception("model_inception.h5", save_format="h5")
