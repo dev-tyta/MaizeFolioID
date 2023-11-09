@@ -5,6 +5,7 @@ from tensorflow.keras import models
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg16 import preprocess_input
+from .models.get_model import download_model
 
 model_ = download_model("Testys/MaizeFolioID", "model_2.h5")
 img_ = '../data/external/cr_leaf.jpeg'
@@ -26,5 +27,5 @@ def model_test(img_path, model):
     return predicted_class
 
 
-results =model_test(img_path=img_, model=model_)
+results = model_test(img_path=img_, model=model_)
 print(results)
