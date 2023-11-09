@@ -10,12 +10,11 @@ from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras import losses
-from sklearn.utils.class_weight import compute_class_weight
 from tensorflow.keras.layers import Dense, Flatten, GlobalAveragePooling2D, Dropout, BatchNormalization
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
-from keras.utils import to_categorical
+# from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
+
 
 #  splitfolders.ratio("/content/drive/MyDrive/FDD Project/dataset/data",
 #                    output="/content/drive/MyDrive/FDD Project/dataset/out",
@@ -27,6 +26,7 @@ from keras.utils import to_categorical
 train_dir = "../data/processed/corn/train"
 test_dir = "../data/processed/corn/test"
 
+data_dir = train_dir
 class_names = os.listdir(train_dir)
 class_counts = {}
 
