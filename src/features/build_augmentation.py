@@ -23,22 +23,22 @@ def augmentation(train_dir, test_dir):
     train_generator = gen.flow_from_directory(
         train_dir,
         target_size=(224,224),
-        class_mode = "categorical",
+        class_mode="categorical",
         subset="training",
-        batch_size =1,
+        batch_size=1,
         seed=2020
     )
 
     val_generator = gen.flow_from_directory(
         train_dir,
-        target_size = (224, 224),
-        class_mode = "categorical",
+        target_size=(224, 224),
+        class_mode="categorical",
         subset="validation"
     )
 
     test_generator = test_gen.flow_from_directory(
         test_dir,
-        target_size= (224, 224)
+        target_size=(224, 224)
     )
 
     return train_generator, val_generator, test_generator
