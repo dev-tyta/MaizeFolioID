@@ -11,12 +11,13 @@ gen = ImageDataGenerator(rescale=1./255,
                          vertical_flip=True,
                          brightness_range=[0.8, 1.2],
                          fill_mode='nearest',
-                         validation_split= 0.2
-)
+                         validation_split=0.2
+                         )
 
 test_gen = ImageDataGenerator(
     rescale=1./255
 )
+
 
 def augmentation(train_dir, test_dir):
     train_generator = gen.flow_from_directory(
