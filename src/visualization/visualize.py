@@ -1,3 +1,4 @@
+import numpy as np
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -44,12 +45,14 @@ def show_random_image(generator):
         ax[i].imshow(image)
         ax[i].axis('off')
 
-def plot_confusion_matrix(actual, predicted, label= [3,2,1,0]):
+
+def plot_confusion_matrix(actual, predicted, label=None):
+    if label is None:
+        label = [3, 2, 1, 0]
     conf = confusion_matrix(actual, predicted, labels=label)
-    plt.figure(figsize=(8,6))
+    plt.figure(figsize=(8, 6))
     sns.heatmap(conf, annot=True, fmt="d", cmap="Blues")
     plt.xlabel("Predicted")
     plt.ylabel("Actual")
     plt.title("Confusion Matrix")
     plt.show()
-
