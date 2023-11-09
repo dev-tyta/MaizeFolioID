@@ -15,7 +15,6 @@ from tensorflow.keras.layers import Dense, Flatten, GlobalAveragePooling2D, Drop
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
-from imblearn.over_sampling import RandomOverSampler
 from keras.utils import to_categorical
 
 #  splitfolders.ratio("/content/drive/MyDrive/FDD Project/dataset/data",
