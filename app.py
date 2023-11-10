@@ -18,7 +18,7 @@ def run():
     img_in = st.file_uploader(label="Upload the photo of your maize leaf here.", type=["png", "jpg", "jpeg"])
     if img_in is not None:
         img_content = img_in.read()
-        processed_img = preprocess(img_content, target_shape=(260, 260))
+        processed_img = preprocess(img_content, target_shape=(224, 224))
         img_pred = prediction(model, x=processed_img)
         class_name = classifier(img_pred)
     
