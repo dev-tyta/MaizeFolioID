@@ -5,7 +5,7 @@ from src.data.preprocess_img import preprocess
 from src.models.predict_model import prediction, classifier
 
 
-model = download_model("Testys/MaizeFolioID", "model_eff.h5")
+model = download_model("Testys/MaizeFolioID", "model_vgg.h5")
 
 
 def run():
