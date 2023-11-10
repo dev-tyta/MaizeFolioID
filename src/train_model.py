@@ -99,7 +99,7 @@ test_generator = datagen_validation.flow_from_directory(
 ### VGG16
 """
 
-base_model = VGG16(include_top=False, weights='imagenet', input_shape=(224, 224, 3))
+base_model = VGG16(include_top=False, weights='imagenet', input_shape=(260, 260, 3))
 base_model.trainable = True
 set_trainable = False
 for layer in base_model.layers:
