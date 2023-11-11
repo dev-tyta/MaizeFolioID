@@ -1,11 +1,12 @@
+import tensorflow as tf
 from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras import losses
 from tensorflow.keras.layers import Dense, Flatten, GlobalAveragePooling2D, Dropout, BatchNormalization
 from tensorflow.keras.models import Model, Sequential
 
-### InceptionV3 Model
 
+# InceptionV3 Model
 base2 = InceptionV3(weights="imagenet", include_top=False, input_shape=(299, 299, 3))
 # Set the bottom 10 layers to be trainable
 for layer in base2.layers[-10:]:
@@ -43,7 +44,7 @@ history_in = model_inception.fit(train_generator,
                                  )
 
 
-### VGG16
+# VGG16
 base_model = VGG16(include_top=False, weights='imagenet', input_shape=(260, 260, 3))
 base_model.trainable = True
 set_trainable = False
