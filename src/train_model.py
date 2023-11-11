@@ -112,7 +112,7 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
               )
 
 history = model.fit(train_generator,
-                    epochs=30,
+                    epochs=50,
                     validation_data=val_generator
                     )
 
