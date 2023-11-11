@@ -4,9 +4,9 @@ from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras.layers import Dense, Flatten, GlobalAveragePooling2D, Dropout, BatchNormalization
 from tensorflow.keras.models import Model, Sequential
 
-
-
 # InceptionV3 Model
+
+
 def create_inception_model():
     base2 = InceptionV3(weights="imagenet", include_top=False, input_shape=(299, 299, 3))
     # Set the bottom 10 layers to be trainable
@@ -46,6 +46,7 @@ def create_inception_model():
 
 
 # VGG16
+
 def create_vgg():
     base_model = VGG16(include_top=False, weights='imagenet', input_shape=(260, 260, 3))
     base_model.trainable = True
