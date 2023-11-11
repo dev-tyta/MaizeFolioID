@@ -73,7 +73,6 @@ test_generator = datagen_validation.flow_from_directory(
 
 ### VGG16
 """
-
 base_model = VGG16(include_top=False, weights='imagenet', input_shape=(260, 260, 3))
 base_model.trainable = True
 set_trainable = False
@@ -115,7 +114,6 @@ history = model.fit(train_generator,
                     epochs=50,
                     validation_data=val_generator
                     )
-
 
 """### Model Saving"""
 
