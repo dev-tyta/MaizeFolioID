@@ -3,8 +3,8 @@ import shutil
 from random import choice
 import tensorflow as tf
 import numpy as np
-# import splitfolders
-# import python_splitter
+import splitfolders
+import python_splitter
 import matplotlib.pyplot as plt
 from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 from tensorflow.keras.applications.inception_v3 import InceptionV3
@@ -116,44 +116,7 @@ history = model.fit(train_generator,
                     validation_data=val_generator
                     )
 
-"""### InceptionV3 Model"""
-"""
-base2 = InceptionV3(weights="imagenet", include_top=False, input_shape=(299, 299, 3))
-# Set the bottom 10 layers to be trainable
-for layer in base2.layers[-10:]:
-    layer.trainable = True
 
-model_inception = Sequential([
-    base2,
-    GlobalAveragePooling2D(),
-    Flatten(),
-    BatchNormalization(),
-    Dense(512, activation="relu"),
-    Dropout(0.5),
-    BatchNormalization(),
-    Dense(256, activation="relu"),
-    Dropout(0.5),
-    BatchNormalization(),
-    Dense(128, activation="relu"),
-    Dropout(0.5),
-    BatchNormalization(),
-    Dense(32, activation="relu"),
-    Dropout(0.5),
-    Dense(4, activation="softmax")
-])
-
-model_inception.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
-                        loss="categorical_crossentropy",
-                        metrics=["accuracy"]
-                        )
-
-model_inception.summary()
-
-history_in = model_inception.fit(train_generator,
-                                 epochs=50,
-                                 validation_data=val_generator
-                                 )
-"""
 """### Model Saving"""
 
 model.save("model_vgg.h5", save_format="h5")
