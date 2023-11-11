@@ -23,6 +23,7 @@ splitfolders.ratio("/content/drive/MyDrive/FDD Project/dataset/data",
 
 train_dir = "../data/processed/corn/train"
 test_dir = "../data/processed/corn/test"
+val_dir = "../data/processed/corn/val"
 
 data_dir = train_dir
 class_names = os.listdir(train_dir)
@@ -46,8 +47,7 @@ datagen_train = ImageDataGenerator(
     shear_range=0.2,
     zoom_range=0.2,
     horizontal_flip=True,
-    fill_mode='nearest',
-    validation_split=0.2)
+    fill_mode='nearest')
 
 datagen_validation = ImageDataGenerator(rescale=1./255)
 
@@ -59,15 +59,14 @@ train_generator = datagen_train.flow_from_directory(
 )
 
 val_generator = datagen_train.flow_from_directory(
-    train_dir,
+    val_dir,
     target_size=(224, 224),
-    class_mode="categorical",
-    subset="validation"
+    class_mode="categorical"
 )
 
 test_generator = datagen_validation.flow_from_directory(
     test_dir,
-    target_size=(224, 224),
+    target_size=(224, 224)
 )
 
 """## Model Training
