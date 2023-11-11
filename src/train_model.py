@@ -15,13 +15,11 @@ from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 # from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
-
-#  splitfolders.ratio("/content/drive/MyDrive/FDD Project/dataset/data",
-#                    output="/content/drive/MyDrive/FDD Project/dataset/out",
-#                    seed=42,
-#                    ratio=(.8, .2, .0)
-#                    )
-
+splitfolders.ratio("/content/drive/MyDrive/FDD Project/dataset/data",
+                   output="/content/drive/MyDrive/FDD Project/dataset/out",
+                   seed=42,
+                   ratio=(.6, .2, .2)
+                   )
 
 train_dir = "../data/processed/corn/train"
 test_dir = "../data/processed/corn/test"
