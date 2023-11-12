@@ -114,4 +114,7 @@ history = model.fit(train_generator,
 
 model.save("model_vgg.h5", save_format="h5")
 
-# model_inception("model_inception.h5", save_format="h5")
+# Removing Inception model from code
+
+# EfficientNet
+
