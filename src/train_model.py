@@ -118,4 +118,12 @@ model.save("model_vgg.h5", save_format="h5")
 # Removing Inception model from code
 
 # EfficientNet
+inputs_1 = tf.keras.Input(shape=(260, 260, 3))
+mymodel=enet.EfficientNetB2(input_shape = (260, 260, 3), include_top = False, weights = 'imagenet')
+x = tf.keras.layers.AveragePooling2D(pool_size=(7, 7))(mymodel.output)
+x = tf.keras.layers.Flatten()(x)
+predictors = tf.keras.layers.Dense(4,activation='softmax',name='Predictions')(x)
+final_model = Model(mymodel.input, outputs=predictors)
+return final_model
+
 
