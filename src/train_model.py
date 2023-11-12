@@ -8,6 +8,7 @@ from tensorflow.keras import losses
 from tensorflow.keras.layers import Dense, Flatten, GlobalAveragePooling2D, Dropout, BatchNormalization
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import efficientnet.tfkeras as enet
 # from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
 splitfolders.ratio("/content/drive/MyDrive/FDD Project/dataset/data",
