@@ -124,6 +124,9 @@ x = tf.keras.layers.AveragePooling2D(pool_size=(7, 7))(mymodel.output)
 x = tf.keras.layers.Flatten()(x)
 predictors = tf.keras.layers.Dense(4,activation='softmax',name='Predictions')(x)
 final_model = Model(mymodel.input, outputs=predictors)
-return final_model
 
 
+final_model.compile(optimizer = tf.keras.optimizers.Adam(learning_rate=0.0001),
+                    loss="categorical_crossentropy",
+                    metrics=["accuracy"]
+                    )
