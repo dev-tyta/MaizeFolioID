@@ -159,3 +159,7 @@ history_eff = model_eff.fit(train_generator,
                             callbacks=callbacks,
                             class_weight=class_weights
                             )
+
+# Model saving for EfficientNet
+
+model_eff.save("model_eff.h5", save_format="h5")
