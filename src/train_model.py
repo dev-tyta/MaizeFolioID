@@ -10,6 +10,7 @@ from tensorflow.keras.applications.vgg16 import VGG16
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import efficientnet.tfkeras as enet
+from collections import Counter
 # from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
 splitfolders.ratio("../data/raw/data",
