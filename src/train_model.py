@@ -12,15 +12,15 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import efficientnet.tfkeras as enet
 # from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
-splitfolders.ratio("/content/drive/MyDrive/FDD Project/dataset/data",
-                   output="/content/drive/MyDrive/FDD Project/dataset/out",
+splitfolders.ratio("../data/raw/data",
+                   output="../data/processed/out",
                    seed=42,
                    ratio=(.6, .2, .2)
                    )
 
-train_dir = "../data/processed/corn/train"
-test_dir = "../data/processed/corn/test"
-val_dir = "../data/processed/corn/val"
+train_dir = "../data/processed/out/train"
+test_dir = "../data/processed/out/test"
+val_dir = "../data/processed/out/val"
 
 data_dir = train_dir
 class_names = os.listdir(train_dir)
@@ -36,35 +36,35 @@ print(class_counts)
 
 """### Data Augmentation"""
 
-datagen_train = ImageDataGenerator(
-    rescale=1./255,
-    rotation_range=20,
-    width_shift_range=0.2,
-    height_shift_range=0.2,
-    shear_range=0.2,
-    zoom_range=0.2,
-    horizontal_flip=True,
-    fill_mode='nearest')
+datagen_train = ImageDataGenerator(rescale=1./255,
+                                   rotation_range=20,
+                                   width_shift_range=0.2,
+                                   height_shift_range=0.2,
+                                   shear_range=0.2,
+                                   zoom_range=0.2,
+                                   horizontal_flip=True,
+                                   fill_mode='nearest',
+                                   validation_split=0.0
+                                   )
 
-datagen_validation = ImageDataGenerator(rescale=1./255)
+datagen_validation = ImageDataGenerator(rescale=1./255,
+                                        validation_split=0.0
+                                        )
+datagen_test = ImageDataGenerator(rescale=1./255)
 
-train_generator = datagen_train.flow_from_directory(
-    train_dir,
-    target_size=(224, 224),
-    class_mode="categorical",
-    subset="training",
-)
+train_generator = datagen_train.flow_from_directory(train_dir,
+                                                    target_size=(224, 224),
+                                                    class_mode="categorical"
+                                                    )
 
-val_generator = datagen_train.flow_from_directory(
-    val_dir,
-    target_size=(224, 224),
-    class_mode="categorical"
-)
+val_generator = datagen_validation.flow_from_directory(val_dir,
+                                                       target_size=(224, 224),
+                                                       class_mode="categorical"
+                                                       )
 
-test_generator = datagen_validation.flow_from_directory(
-    test_dir,
-    target_size=(224, 224)
-)
+test_generator = datagen_test.flow_from_directory(test_dir,
+                                                  target_size=(224, 224)
+                                                  )
 
 """## Model Training
 
@@ -127,11 +127,19 @@ x = tf.keras.layers.Flatten()(x)
 predictors = tf.keras.layers.Dense(4, activation='softmax', name='Predictions')(x)
 final_model = Model(mymodel.input, outputs=predictors)
 
+def scheduler(epoch, lr):
+  if epoch < 3:
+    return lr
+  else:
+    return lr * tf.math.exp(-0.1)
+
+
 def callbacks(patience=2):
-    early=tf.keras.callbacks.EarlyStopping(monitor='val_loss',patience=patience,min_delta=0.001)
-    lr=tf.keras.callbacks.LearningRateScheduler(scheduler)
-    callbacks_list=[early,lr]
+    early = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=patience, min_delta=0.001)
+    lr = tf.keras.callbacks.LearningRateScheduler(scheduler)
+    callbacks_list=[early, lr]
     return callbacks_list
+
 
 def model(new_model=final_model, layers_num=1, trainable=False):
     for layer_eff in new_model.layers[:layers_num]:
@@ -149,6 +157,6 @@ model_eff.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
 history_eff = model_eff.fit(train_generator,
                             epochs=50,
                             validation_data=val_generator,
-                            callbacks=callbacks
+                            callbacks=callbacks,
                             class_weight=class_weights
                             )
