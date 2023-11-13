@@ -127,16 +127,28 @@ x = tf.keras.layers.Flatten()(x)
 predictors = tf.keras.layers.Dense(4, activation='softmax', name='Predictions')(x)
 final_model = Model(mymodel.input, outputs=predictors)
 
+def callbacks(patience=2):
+    early=tf.keras.callbacks.EarlyStopping(monitor='val_loss',patience=patience,min_delta=0.001)
+    lr=tf.keras.callbacks.LearningRateScheduler(scheduler)
+    callbacks_list=[early,lr]
+    return callbacks_list
 
 def model(new_model=final_model, layers_num=1, trainable=False):
-    for layer in new_model.layers[:layers_num]:
-        layer.trainable = trainable
+    for layer_eff in new_model.layers[:layers_num]:
+        layer_eff.trainable = trainable
     return new_model
 
 
-final_model = model(final_model)
+model_eff = model(final_model)
 
-final_model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
-                    loss="categorical_crossentropy",
-                    metrics=["accuracy"]
-                    )
+model_eff.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
+                  loss="categorical_crossentropy",
+                  metrics=["accuracy"]
+                  )
+
+history_eff = model_eff.fit(train_generator,
+                            epochs=50,
+                            validation_data=val_generator,
+                            callbacks=callbacks
+                            class_weight=class_weights
+                            )
