@@ -148,7 +148,9 @@ def model(new_model=final_model, layers_num=1, trainable=False):
     return new_model
 
 
-
+counter = Counter(train_data.classes)
+max_val = float(max(counter.values()))
+class_weights = {class_id: max_val/num_images for class_id, num_images in counter.items()}
 
 model_eff = model(final_model)
 
