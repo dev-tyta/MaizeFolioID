@@ -119,13 +119,15 @@ model.save("model_vgg.h5", save_format="h5")
 # Removing Inception model from code
 
 # EfficientNet
-mymodel = enet.EfficientNetB2(input_shape=(260, 260, 3), include_top=False, weights='imagenet')
+my_model = enet.EfficientNetB2(input_shape=(260, 260, 3), include_top=False, weights='imagenet')
 
 inputs_1 = tf.keras.Input(shape=(260, 260, 3))
-x = tf.keras.layers.AveragePooling2D(pool_size=(7, 7))(mymodel.output)
+x = tf.keras.layers.AveragePooling2D(pool_size=(7, 7))(my_model.output)
 x = tf.keras.layers.Flatten()(x)
 predictors = tf.keras.layers.Dense(4, activation='softmax', name='Predictions')(x)
-final_model = Model(mymodel.input, outputs=predictors)
+model_eff = Model(mymodel.input, outputs=predictors)
+for layer_eff in model_eff.layers[:1]:
+    layer_eff.trainable = False
 
 
 def scheduler(epoch, lr):
@@ -142,17 +144,9 @@ def callbacks(patience=2):
     return callbacks_list
 
 
-def model(new_model=final_model, layers_num=1, trainable=False):
-    for layer_eff in new_model.layers[:layers_num]:
-        layer_eff.trainable = trainable
-    return new_model
-
-
 counter = Counter(train_data.classes)
 max_val = float(max(counter.values()))
 class_weights = {class_id: max_val/num_images for class_id, num_images in counter.items()}
-
-model_eff = model(final_model)
 
 model_eff.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
                   loss="categorical_crossentropy",
