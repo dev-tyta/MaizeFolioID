@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras import losses
 from tensorflow.keras.layers import Dense, Flatten, GlobalAveragePooling2D, Dropout, BatchNormalization
+from tensorflow.keras.applications.vgg16 import VGG16
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import efficientnet.tfkeras as enet
@@ -119,14 +120,14 @@ model.save("model_vgg.h5", save_format="h5")
 
 # EfficientNet
 inputs_1 = tf.keras.Input(shape=(260, 260, 3))
-mymodel=enet.EfficientNetB2(input_shape = (260, 260, 3), include_top = False, weights = 'imagenet')
+mymodel = enet.EfficientNetB2(input_shape=(260, 260, 3), include_top=False, weights='imagenet')
 x = tf.keras.layers.AveragePooling2D(pool_size=(7, 7))(mymodel.output)
 x = tf.keras.layers.Flatten()(x)
-predictors = tf.keras.layers.Dense(4,activation='softmax',name='Predictions')(x)
+predictors = tf.keras.layers.Dense(4, activation='softmax', name='Predictions')(x)
 final_model = Model(mymodel.input, outputs=predictors)
 
 
-final_model.compile(optimizer = tf.keras.optimizers.Adam(learning_rate=0.0001),
+final_model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
                     loss="categorical_crossentropy",
                     metrics=["accuracy"]
                     )
