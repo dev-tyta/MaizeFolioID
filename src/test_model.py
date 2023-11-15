@@ -11,6 +11,7 @@ img_ = '../data/external/cr_leaf.jpeg'
 
 
 # preprocessing external test image
+
 def model_test(img_path, model):
     img_path = img_path
     img = image.load_img(img_path, target_size=(224, 224))
