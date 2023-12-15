@@ -4,7 +4,7 @@
 
 ### **1. Introduction**
 
-**MaizeFolioID** is an image classification model crafted to predict the presence of foliar diseases in maize leaves. Leveraging the power of pre-trained models on ImageNet, it identifies specific classes of the maize leaf, aiding in early detection and potentially saving crops from devastating losses.
+**MaizeFolioID** is an image classification model trained to predict the presence of foliar diseases in maize leaves. Leveraging the power of pre-trained models on ImageNet, it identifies specific classes of the maize leaf, aiding in early detection and potentially saving crops from devastating losses.
 
 ### **2. Getting Started**
 
