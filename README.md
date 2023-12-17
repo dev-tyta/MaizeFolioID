@@ -48,12 +48,12 @@ cd MaizeFolioID
 pip install -r requirements.txt
 
 # Run the application
-python app.py
+streamlit run app.py
 ```
 
 ### **4. Data Description**
 
-The dataset fueling this endeavor was sourced from Kaggle, shedding light on maize leaf conditions.
+The dataset fueling this work was sourced from Kaggle, shedding light on maize leaf conditions.
 
 - **Dataset Link**: [Corn or Maize Leaf Disease Dataset](https://www.kaggle.com/datasets/smaranjitghose/corn-or-maize-leaf-disease-dataset)
 
@@ -88,19 +88,19 @@ Your insights could aid in refining the model or introducing new features!
 
 ### **9. Future Work & Roadmap**
 
-1. **Model Evolution**: We're planning to harness the capabilities of a VisionTransformer model on our dataset, driving accuracy improvements.
+1. **Model Evolution**: We plan to harness a VisionTransformer model's capabilities on our dataset, driving accuracy improvements.
 2. **Data Augmentation**: Efforts are in the pipeline to gather more datasets for each class, enriching the model's training foundation.
 
-### **10. Acknowledgments**
+### **10. Acknowledgements**
 
 A heartfelt thanks to Kaggle and all data providers for their invaluable datasets.
 
 ### **11. License**
 
-MaizeFolioID is open-source and available under [License Type]. For more details, see the LICENSE file in the repository.
+MaizeFolioID is open-source and available under [MIT License]. For more details, see the LICENSE file in the repository.
 
 ### **12. Contact Information**
 
-For queries or collaboration intentions, kindly reach out through [GitHub](https://github.com/dev-tyta) or [Email](mailto:testimonyadekoya.02@gmail.com).
+For questions or collaboration intentions, please feel free to reach out through [GitHub](https://github.com/dev-tyta) or [Email](mailto:testimonyadekoya.02@gmail.com).
 
 ---
